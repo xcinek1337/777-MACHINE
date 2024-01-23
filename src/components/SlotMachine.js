@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import './style.css'
-
-
+import './style.css';
 
 const SlotMachine = () => {
-	const [reels, setReels] = useState(['', '', '']);
-	const [spinning, setSpinning] = useState(false);
-
+	const [buttonDisable, setButtonDisable] = useState(false);
 
 	const gambling = () => {
 		return (
@@ -23,42 +19,63 @@ const SlotMachine = () => {
 		);
 	};
 	const spinReels = () => {
-		setSpinning(true);
+		setButtonDisable(true);
 
-		// Symulacja losowego zatrzymywania bębnów po określonym czasie
-		const stopTime = [1000, 2000, 3000]; // Czas zatrzymania dla każdego bębna
+		const stopTime = [100, 200, 300, 400, 500, 3000]; 
 
 		setTimeout(() => {
-			setReels(generateRandomSymbols());
+			generateRandomSymbols();
 		}, stopTime[0]);
-
 		setTimeout(() => {
-			setReels(generateRandomSymbols());
+			console.log(`hi`);
+			generateRandomSymbols();
 		}, stopTime[1]);
+		setTimeout(() => {
+			generateRandomSymbols();
+		}, stopTime[2]);
 
 		setTimeout(() => {
-			setReels(generateRandomSymbols());
-			setSpinning(false);
-		}, stopTime[2]);
+			generateRandomSymbols();
+		}, stopTime[3]);
+
+		setTimeout(() => {
+			generateRandomSymbols();
+			setButtonDisable(false);
+		}, stopTime[5]);
 	};
 
 	const generateRandomSymbols = () => {
-		const symbols = ['🍒', '🍇', '🍊', '🔔', '💎']; // Dodaj swoje symbole
+		const symbols = ['🍒', '🍇', '🍊', '🔔', '💎'];
 		return Array.from({ length: 3 }, () => symbols[Math.floor(Math.random() * symbols.length)]);
 	};
 
 	return (
-		<div className='slot-machine'>
-			{gambling()}
-			{gambling()}
-			{gambling()}
-			<button
-				onClick={spinReels}
-				disabled={spinning}
-			>
-				Spin
-			</button>
-		</div>
+		<>
+			<div className='slot__background'></div>
+			<div className='slot__screen'></div>
+			<div className={buttonDisable ? 'slot__machine slot__machine--active' : 'slot__machine'}>
+				{gambling()}
+				{gambling()}
+				{gambling()}
+				{gambling()}
+				{gambling()}
+				{gambling()}
+				{gambling()}
+				{gambling()}
+				{gambling()}
+				{gambling()}
+				{gambling()}
+				{gambling()}
+			</div>
+			<div className='slot__button'>
+				<button
+					onClick={spinReels}
+					disabled={buttonDisable}
+				>
+					Spin
+				</button>
+			</div>
+		</>
 	);
 };
 
