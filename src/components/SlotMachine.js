@@ -7,6 +7,21 @@ const SlotMachine = () => {
 	const [reels, setReels] = useState(['', '', '']);
 	const [spinning, setSpinning] = useState(false);
 
+
+	const gambling = () => {
+		return (
+			<div className='reels'>
+				{generateRandomSymbols().map((symbol, index) => (
+					<div
+						key={index}
+						className='reel'
+					>
+						{symbol}
+					</div>
+				))}
+			</div>
+		);
+	};
 	const spinReels = () => {
 		setSpinning(true);
 
@@ -34,26 +49,9 @@ const SlotMachine = () => {
 
 	return (
 		<div className='slot-machine'>
-			<div className='reels'>
-				{reels.map((symbol, index) => (
-					<div
-						key={index}
-						className='reel'
-					>
-						{symbol}
-					</div>
-				))}
-			</div>
-			<div className='reels'>
-				{reels.map((symbol, index) => (
-					<div
-						key={index}
-						className='reel'
-					>
-						{symbol}
-					</div>
-				))}
-			</div>
+			{gambling()}
+			{gambling()}
+			{gambling()}
 			<button
 				onClick={spinReels}
 				disabled={spinning}
