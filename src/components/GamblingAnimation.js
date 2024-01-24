@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Gambling = ({ randomSymbols }) => {
+const GamblingAnimation = ({ randomSymbols }) => {
 	return (
 		<div className='reels'>
 			{randomSymbols.map((symbol, index) => (
@@ -15,4 +15,4 @@ const Gambling = ({ randomSymbols }) => {
 	);
 };
 
-export default Gambling;
+export default GamblingAnimation;
