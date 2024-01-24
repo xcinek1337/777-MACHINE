@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.css';
 
 const SlotMachine = () => {
 	const [buttonDisable, setButtonDisable] = useState(false);
+	const [isSpin, setIsSpin] = useState(false);
+	const [spinResults, setSpinResults] = useState([]);
 
 	const gambling = () => {
+		const randomSymbols = generateRandomSymbols();
 		return (
 			<div className='reels'>
-				{generateRandomSymbols().map((symbol, index) => (
+				{randomSymbols.map((symbol, index) => (
 					<div
 						key={index}
 						className='reel'
@@ -18,28 +21,63 @@ const SlotMachine = () => {
 			</div>
 		);
 	};
+	const spinContent = () => {
+		return (
+			<>
+				{gambling()}
+				{gambling()}
+				{gambling()}
+				{gambling()}
+				{gambling()}
+				{gambling()}
+				{gambling()}
+				{gambling()}
+				{gambling()}
+			</>
+		);
+	};
+	const spinResult = () => {
+		return (
+			<>
+				{spinResults.map((result, index) => (
+					<div
+						key={index}
+						className='reels'
+					>
+						{result.map((symbol, symbolIndex) => (
+							<div
+								key={symbolIndex}
+								className='reel'
+							>
+								{symbol}
+							</div>
+						))}
+					</div>
+				))}
+			</>
+		);
+	};
+
+	const prepareSpin = () => {
+		setIsSpin(false);
+		setTimeout(() => {
+			spinReels();
+		}, 1000);
+	};
+
 	const spinReels = () => {
 		setButtonDisable(true);
+		setIsSpin(true);
 
-		const stopTime = [100, 200, 300, 400, 500, 3000]; 
+		const stopTime = [100, 200, 300, 400, 500, 1000];
 
-		setTimeout(() => {
-			generateRandomSymbols();
-		}, stopTime[0]);
-		setTimeout(() => {
-			console.log(`hi`);
-			generateRandomSymbols();
-		}, stopTime[1]);
-		setTimeout(() => {
-			generateRandomSymbols();
-		}, stopTime[2]);
+		const results = [];
+		for (let i = 0; i < 3; i++) {
+			results.push(generateRandomSymbols());
+		}
+		setSpinResults(results);
 
 		setTimeout(() => {
-			generateRandomSymbols();
-		}, stopTime[3]);
-
-		setTimeout(() => {
-			generateRandomSymbols();
 			setButtonDisable(false);
 		}, stopTime[5]);
 	};
@@ -53,23 +91,13 @@ const SlotMachine = () => {
 		<>
 			<div className='slot__background'></div>
 			<div className='slot__screen'></div>
-			<div className={buttonDisable ? 'slot__machine slot__machine--active' : 'slot__machine'}>
-				{gambling()}
-				{gambling()}
-				{gambling()}
-				{gambling()}
-				{gambling()}
-				{gambling()}
-				{gambling()}
-				{gambling()}
-				{gambling()}
-				{gambling()}
-				{gambling()}
-				{gambling()}
+			<div className={isSpin ? 'slot__machine slot__machine--active' : 'slot__machine'}>
+				{spinResult()}
+				{spinContent()}
 			</div>
 			<div className='slot__button'>
 				<button
-					onClick={spinReels}
+					onClick={prepareSpin}
 					disabled={buttonDisable}
 				>
 					Spin
