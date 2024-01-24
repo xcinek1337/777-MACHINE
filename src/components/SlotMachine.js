@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import _isEqual from 'lodash/isEqual';
+import { symbols, winingCombinations, megaWinCombinations } from '../utils/winningPatterns';
 import './style.css';
 
 const SlotMachine = () => {
 	const [buttonDisable, setButtonDisable] = useState(false);
-	const [isSpin, setIsSpin] = useState(false);
+	const [isSpinning, setIsSpinning] = useState(false);
+	const [mount, isMount] = useState(true);
+	const [win, isWin] = useState(false);
+	const [megaWin, isMegaWin] = useState(false);
 	const [spinResults, setSpinResults] = useState([]);
 
-	const winingResult = [
-		['🍒', '🍒', '🍒'],
-		['🍒', '🍒', '🍒'],
-		['🍒', '🍒', '🍒'],
-	];
+
 
 	const gambling = () => {
 		const randomSymbols = generateRandomSymbols();
@@ -37,9 +38,6 @@ const SlotMachine = () => {
 		);
 	};
 	const spinResult = () => {
-		console.log('spinResults', spinResults);
-		console.log('winingPattern', winingResult);
-		console.log('win?', JSON.stringify(spinResults) === JSON.stringify(winingResult));
 		return (
 			<>
 				{spinResults.map((result, index) => (
@@ -62,7 +60,9 @@ const SlotMachine = () => {
 	};
 
 	const prepareSpin = () => {
-		setIsSpin(false);
+		setIsSpinning(false);
+		isMegaWin(false);
+		isWin(false);
 		setTimeout(() => {
 			spinReels();
 		}, 1000);
@@ -70,9 +70,9 @@ const SlotMachine = () => {
 
 	const spinReels = () => {
 		setButtonDisable(true);
-		setIsSpin(true);
+		setIsSpinning(true);
 
-		const stopTime = [100, 200, 300, 400, 500, 1000];
+		const stopTime = 1000;
 
 		const results = [];
 		for (let i = 0; i < 3; i++) {
@@ -81,13 +81,25 @@ const SlotMachine = () => {
 		setSpinResults(results);
 
 		setTimeout(() => {
+			const normalWin = winingCombinations.some((winningCombo) => {
+				return results.some((resultRow) => {
+					return _isEqual(resultRow, winningCombo);
+				});
+			});
+
+			const megaWin = megaWinCombinations.some((winningCombo) => {
+				return _isEqual(results, winningCombo);
+			});
+
+			isWin(normalWin);
+			isMegaWin(megaWin);
+
 			setButtonDisable(false);
-		}, stopTime[5]);
+			isMount(false)
+		}, stopTime);
 	};
 
 	const generateRandomSymbols = () => {
-		// const symbols = ['🍒', '🍇', '🍊', '🔔', '💎'];
-		const symbols = ['🍒'];
 		return Array.from({ length: 3 }, () => symbols[Math.floor(Math.random() * symbols.length)]);
 	};
 
@@ -95,9 +107,9 @@ const SlotMachine = () => {
 		<>
 			<div className='slot__background'></div>
 			<div className='slot__screen'></div>
-			<div className={isSpin ? 'slot__machine slot__machine--active' : 'slot__machine'}>
+			<div className={isSpinning ? 'slot__machine slot__machine--active' : 'slot__machine'}>
 				{spinResult()}
-				{spinContent(9)}
+				{mount ? spinContent(12) : spinContent(9)}
 			</div>
 			<div className='slot__button'>
 				<button
@@ -106,6 +118,8 @@ const SlotMachine = () => {
 				>
 					Spin
 				</button>
+				{win && <h2>u won!!!!</h2>}
+				{megaWin && <h2>JACKOPOT!@#!@#Q!@#</h2>}
 			</div>
 		</>
 	);

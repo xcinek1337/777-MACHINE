@@ -1,8 +1,7 @@
-*{
-  overflow: hidden;
+* {
+	overflow: hidden;
 }
 .slot__machine {
-
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%);
@@ -26,9 +25,9 @@
 }
 .slot__screen {
 	position: absolute;
-  left: 50%;
-  top: 37.15%;
-  transform: translate(-50%);
+	left: 50%;
+	top: 37.15%;
+	transform: translate(-50%);
 	border: 1px solid green;
 	width: 200px;
 	height: 185px;
@@ -51,9 +50,14 @@
 }
 
 .slot__button {
-	top: 57%;
-	height: 460px;
 	position: absolute;
+	top: 57%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: start;
+	height: 460px;
 	width: 100%;
 	/* border: 1px solid red; */
 	background-color: #ffffff;
@@ -62,7 +66,8 @@
 	z-index: 50;
 }
 button {
-  height: 10%;
+width: 10%;
+	height: 10%;
 	font-size: 16px;
 	cursor: pointer;
 }
