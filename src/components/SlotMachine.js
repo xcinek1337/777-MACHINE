@@ -60,7 +60,7 @@ const SlotMachine = () => {
 	};
 
 	const handleSpinClick = () => {
-		if (credits >= stake) {
+		if (credits >= stake && credits > 0) {
 			setInsufficientCredits(false);
 			setButtonDisable(true);
 			setCredits((prevCredit) => prevCredit - stake);
@@ -123,7 +123,7 @@ const SlotMachine = () => {
 				<div>
 					<p>stake: {stake}</p>
 					<button
-						style={{ width: '100%', height: '30%' }}
+						style={{ width: '100%', height: '50%' }}
 						onClick={() => setStake(credits)}
 					>
 						max bet
@@ -131,6 +131,7 @@ const SlotMachine = () => {
 				</div>
 				<button onClick={() => setStake((prevStake) => prevStake - 50)}>-</button>
 			</div>
+			<footer>provider by xcinekk1337</footer>
 		</>
 	);
 };
