@@ -6,6 +6,12 @@ const SlotMachine = () => {
 	const [isSpin, setIsSpin] = useState(false);
 	const [spinResults, setSpinResults] = useState([]);
 
+	const winingResult = [
+		['🍒', '🍒', '🍒'],
+		['🍒', '🍒', '🍒'],
+		['🍒', '🍒', '🍒'],
+	];
+
 	const gambling = () => {
 		const randomSymbols = generateRandomSymbols();
 		return (
@@ -21,22 +27,19 @@ const SlotMachine = () => {
 			</div>
 		);
 	};
-	const spinContent = () => {
+	const spinContent = (numberOfReels) => {
 		return (
 			<>
-				{gambling()}
-				{gambling()}
-				{gambling()}
-				{gambling()}
-				{gambling()}
-				{gambling()}
-				{gambling()}
-				{gambling()}
-				{gambling()}
+				{Array.from({ length: numberOfReels }).map((_, index) => {
+					return <React.Fragment key={index}>{gambling()}</React.Fragment>;
+				})}
 			</>
 		);
 	};
 	const spinResult = () => {
+		console.log('spinResults', spinResults);
+		console.log('winingPattern', winingResult);
+		console.log('win?', JSON.stringify(spinResults) === JSON.stringify(winingResult));
 		return (
 			<>
 				{spinResults.map((result, index) => (
@@ -83,7 +86,8 @@ const SlotMachine = () => {
 	};
 
 	const generateRandomSymbols = () => {
-		const symbols = ['🍒', '🍇', '🍊', '🔔', '💎'];
+		// const symbols = ['🍒', '🍇', '🍊', '🔔', '💎'];
+		const symbols = ['🍒'];
 		return Array.from({ length: 3 }, () => symbols[Math.floor(Math.random() * symbols.length)]);
 	};
 
@@ -93,7 +97,7 @@ const SlotMachine = () => {
 			<div className='slot__screen'></div>
 			<div className={isSpin ? 'slot__machine slot__machine--active' : 'slot__machine'}>
 				{spinResult()}
-				{spinContent()}
+				{spinContent(9)}
 			</div>
 			<div className='slot__button'>
 				<button
