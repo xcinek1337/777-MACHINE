@@ -1,7 +1,7 @@
-export const symbols = ['🍒', '🍇', '🍊', '🔔', '💎'];
-// export const symbols = [ '💎'];
+// export const symbols = ['🍒', '🍇', '🍊', '🔔', '💎'];
+export const symbols = [ '💎','🍇'];
 
-export const winingCombinations = [
+export const winCombinations = [
 	['🍒', '🍒', '🍒'],
 	['🍇', '🍇', '🍇'],
 	['🍊', '🍊', '🍊'],

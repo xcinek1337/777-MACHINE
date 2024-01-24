@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import _isEqual from 'lodash/isEqual';
-import { symbols, winingCombinations, megaWinCombinations } from '../utils/winningPatterns';
+
+import Gambling from './Gambling';
+
+import { symbols } from '../utils/winningPatterns';
+import { checkNormalWin, checkMegaWin } from '../utils/gameLogic';
 import './style.css';
 
 const SlotMachine = () => {
@@ -11,33 +14,16 @@ const SlotMachine = () => {
 	const [megaWin, isMegaWin] = useState(false);
 	const [spinResults, setSpinResults] = useState([]);
 
-
-
-	const gambling = () => {
-		const randomSymbols = generateRandomSymbols();
-		return (
-			<div className='reels'>
-				{randomSymbols.map((symbol, index) => (
-					<div
-						key={index}
-						className='reel'
-					>
-						{symbol}
-					</div>
-				))}
-			</div>
-		);
-	};
-	const spinContent = (numberOfReels) => {
+	const renderReels = (numberOfReels) => {
 		return (
 			<>
 				{Array.from({ length: numberOfReels }).map((_, index) => {
-					return <React.Fragment key={index}>{gambling()}</React.Fragment>;
+					return <React.Fragment key={index}>{<Gambling randomSymbols={generateRandomSymbols()} />}</React.Fragment>;
 				})}
 			</>
 		);
 	};
-	const spinResult = () => {
+	const renderResult = () => {
 		return (
 			<>
 				{spinResults.map((result, index) => (
@@ -59,66 +45,52 @@ const SlotMachine = () => {
 		);
 	};
 
-	const prepareSpin = () => {
+	const handleSpinClick = () => {
 		setIsSpinning(false);
 		isMegaWin(false);
 		isWin(false);
+
 		setTimeout(() => {
 			spinReels();
 		}, 1000);
 	};
 
+	const generateRandomSymbols = () => {
+		return Array.from({ length: 3 }, () => symbols[Math.floor(Math.random() * symbols.length)]);
+	};
+	
 	const spinReels = () => {
 		setButtonDisable(true);
 		setIsSpinning(true);
 
-		const stopTime = 1000;
-
-		const results = [];
-		for (let i = 0; i < 3; i++) {
-			results.push(generateRandomSymbols());
-		}
+		const results = Array.from({ length: 3 }, () => generateRandomSymbols());
 		setSpinResults(results);
-
+		console.log(results);
 		setTimeout(() => {
-			const normalWin = winingCombinations.some((winningCombo) => {
-				return results.some((resultRow) => {
-					return _isEqual(resultRow, winningCombo);
-				});
-			});
-
-			const megaWin = megaWinCombinations.some((winningCombo) => {
-				return _isEqual(results, winningCombo);
-			});
-
-			isWin(normalWin);
-			isMegaWin(megaWin);
+			isWin(checkNormalWin(results));
+			isMegaWin(checkMegaWin(results));
 
 			setButtonDisable(false);
-			isMount(false)
-		}, stopTime);
-	};
-
-	const generateRandomSymbols = () => {
-		return Array.from({ length: 3 }, () => symbols[Math.floor(Math.random() * symbols.length)]);
+			isMount(false);
+		}, 1000);
 	};
 
 	return (
 		<>
 			<div className='slot__background'></div>
 			<div className='slot__screen'></div>
-			<div className={isSpinning ? 'slot__machine slot__machine--active' : 'slot__machine'}>
-				{spinResult()}
-				{mount ? spinContent(12) : spinContent(9)}
+			<div className={`slot__machine ${isSpinning ? 'slot__machine--active' : ''}`}>
+				{renderResult()}
+				{mount ? renderReels(12) : renderReels(9)}
 			</div>
 			<div className='slot__button'>
 				<button
-					onClick={prepareSpin}
+					onClick={handleSpinClick}
 					disabled={buttonDisable}
 				>
 					Spin
 				</button>
-				{win && <h2>u won!!!!</h2>}
+				{win && <h2>normal win</h2>}
 				{megaWin && <h2>JACKOPOT!@#!@#Q!@#</h2>}
 			</div>
 		</>
