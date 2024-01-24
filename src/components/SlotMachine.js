@@ -120,7 +120,15 @@ const SlotMachine = () => {
 				<br />
 				<br />
 				<button onClick={() => setStake((prevStake) => prevStake + 50)}>+</button>
-				<p>stake: {stake}</p>
+				<div>
+					<p>stake: {stake}</p>
+					<button
+						style={{ width: '100%', height: '30%' }}
+						onClick={() => setStake(credits)}
+					>
+						max bet
+					</button>
+				</div>
 				<button onClick={() => setStake((prevStake) => prevStake - 50)}>-</button>
 			</div>
 		</>
