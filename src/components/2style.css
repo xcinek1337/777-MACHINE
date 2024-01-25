@@ -13,13 +13,24 @@ body {
 .logo {
 	display: flex;
 	justify-content: center;
-
+	background-color: lightblue;
+	height: 25vh;
 	padding-top: 1rem;
 }
 .logo img {
 	width: 250px;
 }
-
+.slot__screen {
+	display: flex;
+	justify-content: center;
+	height: 330px;
+}
+.screen__border {
+	position: absolute;
+	width: 696px;
+	height: 750px;
+	top: -35.8%;
+}
 .slot__machine {
 	position: absolute;
 	display: flex;
@@ -35,6 +46,8 @@ body {
 	transition: transform 1s;
 
 	border: 1px solid red;
+
+	z-index: -2;
 }
 .slot__machine--active {
 	transform: translate(-50%, -430%);
@@ -47,11 +60,19 @@ body {
 	font-size: 4rem;
 }
 
-.slot__button {
-	position: absolute;
-	top: 60%;
-	outline: 2px solid red;
-	width: 100%;
+.gui {
+	height: 360px;
+	/* outline: 2px solid red; */
 	background-color: lightblue;
 }
 /* } */
+.slot__footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 40px;
+	text-align: center;
+	font-size: 0.9rem;
+	background-color: lightblue;
+	border-top: 1px solid grey;
+}

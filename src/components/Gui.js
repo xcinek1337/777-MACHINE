@@ -5,7 +5,7 @@ import { setStartSpinAction } from '../redux/actions/777machine';
 const Gui = () => {
 	const dispatch = useDispatch();
 	return (
-		<div className='slot__button'>
+		<div className='slot__gui gui'>
 			{/* <p>CREDITS:</p> */}
 			{/* {win && <h2>normal win</h2>} */}
 			{/* {megaWin && <h2>JACKOPOT!@#!@#Q!@#</h2>} */}

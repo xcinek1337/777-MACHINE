@@ -7,7 +7,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import Confetti from 'react-dom-confetti';
 import SlotMachine from './SlotMachine';
 import Gui from './Gui';
-
+import Screen from './Screen';
 import './2style.css';
 
 import reducers from '../redux/reducers';
@@ -28,16 +28,14 @@ const App = () => {
 				config={config}
 			/>
 			<header className='logo'>
-				<img
-					src={require('../img/jackpot.png')}
-					alt=''
-				/>
+				
 			</header>
 			<main style={{ position: 'relative' }}>
 				<SlotMachine />
+				<Screen />
 				<Gui />
 			</main>
-			<footer>Provider by xcinek1337</footer>
+			<footer className='slot__footer'>2077© Provider by xcinek1337</footer>
 		</Provider>
 	);
 };
