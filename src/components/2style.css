@@ -22,22 +22,22 @@ body {
 
 .slot__machine {
 	position: absolute;
-	left: 50%;
-	top: 0;
-	transform: translate(-50%);
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: start;
 
+	top: 0;
+	left: 50%;
+	transform: translate(-50%, 0);
+
 	height: 330px;
-	transition: top 1s;
+	transition: transform 1s;
 
 	border: 1px solid red;
 }
 .slot__machine--active {
-	top: -1230%;
+	transform: translate(-50%, -430%);
 }
 .reels {
 	display: flex;
@@ -48,7 +48,10 @@ body {
 }
 
 .slot__button {
-	background-color: beige;
-	z-index: -5;
+	position: absolute;
+	top: 60%;
+	outline: 2px solid red;
+	width: 100%;
+	background-color: lightblue;
 }
 /* } */

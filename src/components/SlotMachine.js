@@ -45,6 +45,7 @@ const SlotMachine = () => {
 			</>
 		);
 	};
+	
 	const renderResult = () => {
 		// zabezpieczenie jesli spinResult jest puste - zeby graficznie ilosc reels byla taka sama jak po pierwszym zakreceniu
 		if (spinResults.length === 0) {

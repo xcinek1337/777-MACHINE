@@ -37,6 +37,7 @@ const App = () => {
 				<SlotMachine />
 				<Gui />
 			</main>
+			<footer>Provider by xcinek1337</footer>
 		</Provider>
 	);
 };

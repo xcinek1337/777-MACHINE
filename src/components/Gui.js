@@ -6,7 +6,7 @@ const Gui = () => {
 	const dispatch = useDispatch();
 	return (
 		<div className='slot__button'>
-			<p>CREDITS:</p>
+			{/* <p>CREDITS:</p> */}
 			{/* {win && <h2>normal win</h2>} */}
 			{/* {megaWin && <h2>JACKOPOT!@#!@#Q!@#</h2>} */}
 			{/* {insufficientCredits && <h1 style={{ color: 'red' }}>no avaliable fund </h1>} */}
@@ -16,10 +16,9 @@ const Gui = () => {
 			>
 				Spin
 			</button>
-			<br />
-			<br />
+		
 			{/* <button onClick={() => setStake((prevStake) => prevStake + 50)}>+</button> */}
-			<div>
+			{/* <div>
 				<p>stake:</p>
 				<button
 					style={{ width: '100%', height: '50%' }}
@@ -27,7 +26,7 @@ const Gui = () => {
 				>
 					max bet
 				</button>
-			</div>
+			</div> */}
 			{/* <button onClick={() => setStake((prevStake) => prevStake - 50)}>-</button> */}
 		</div>
 	);
