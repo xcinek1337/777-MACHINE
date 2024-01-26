@@ -6,33 +6,45 @@ import GamblingAnimation from './GamblingAnimation';
 import { symbols } from '../utils/winningPatterns';
 import { megaWinCombinations } from '../utils/winningPatterns';
 import { checkNormalWin, checkMegaWin } from '../utils/gameLogic';
-import { setStartSpinAction } from '../redux/actions/777machine';
+import {
+	setStartSpinAction,
+	setMachineAvtiveAction,
+	setButtonDisableAction,
+	setSpinResultAction,
+	setNormalWinAction,
+	setMegaWinAction,
+} from '../redux/actions/777machine';
 
 const SlotMachine = () => {
 	const dispatch = useDispatch();
-	const isSpin = useSelector((state) => state.isSpin);
+	
+	const startSpin = useSelector((state) => state.startSpin);
+	const machineActive = useSelector((state) => state.machineActive);
+	const result = useSelector((state) => state.spinResult);
 
-	const [buttonDisable, setButtonDisable] = useState(false);
-	const [isSpinning, setIsSpinning] = useState(false);
-	const [win, isWin] = useState(false);
-	const [megaWin, isMegaWin] = useState(false);
-	const [spinResults, setSpinResults] = useState([]);
-	const [credits, setCredits] = useState(1000);
-	const [insufficientCredits, setInsufficientCredits] = useState(false);
-	const [stake, setStake] = useState(100);
+	const afterSpin = () => {
+		dispatch(setStartSpinAction(false));
+		dispatch(setButtonDisableAction(false));
+		dispatch(setNormalWinAction(checkNormalWin(result)));
+		dispatch(setMegaWinAction(checkMegaWin(result)));
+	};
+
+
 
 	useEffect(() => {
-		handleSpinClick();
-	}, [isSpin]);
+		if (startSpin) {
+			spinReels();
+			dispatch(setMachineAvtiveAction(true));
+		}
+	}, [startSpin]);
 
 	useEffect(() => {
-		if (win) {
-			setCredits((prevCredit) => prevCredit + stake * 10);
+		if (result) {
+			setTimeout(() => {
+				afterSpin();
+			}, 1200);
 		}
-		if (megaWin) {
-			setCredits((prevCredit) => prevCredit + stake * 100000);
-		}
-	}, [win, megaWin]);
+	}, [result]);
 
 	const renderReels = (numberOfReels) => {
 		return (
@@ -45,33 +57,15 @@ const SlotMachine = () => {
 			</>
 		);
 	};
-	
+
 	const renderResult = () => {
 		// zabezpieczenie jesli spinResult jest puste - zeby graficznie ilosc reels byla taka sama jak po pierwszym zakreceniu
-		if (spinResults.length === 0) {
-			return (
-				<>
-					{megaWinCombinations[1].map((result, index) => (
-						<div
-							key={index}
-							className='reels'
-						>
-							{result.map((symbol, symbolIndex) => (
-								<div
-									key={symbolIndex}
-									className='reel'
-								>
-									{symbol}
-								</div>
-							))}
-						</div>
-					))}
-				</>
-			);
+		if (result.length === 0) {
+			mockModel();
 		}
 		return (
 			<>
-				{spinResults.map((result, index) => (
+				{result.map((result, index) => (
 					<div
 						key={index}
 						className='reels'
@@ -90,21 +84,15 @@ const SlotMachine = () => {
 		);
 	};
 
-	const handleSpinClick = () => {
-		if (credits >= stake && credits > 0) {
-			spinReels();
+	// const handleSpinClick = () => {
+	// 	if (credits >= stake && credits > 0) {
+	// 		spinReels();
 
-			// to mozna w funkcje opakowac tez
-			setIsSpinning(true);
-			setButtonDisable(true);
-			setCredits((prevCredit) => prevCredit - stake);
-			setInsufficientCredits(false);
-			isMegaWin(false);
-			isWin(false);
-		} else {
-			setInsufficientCredits(true);
-		}
-	};
+			
+			// kredyty w GUI DOPIERO ZADECYDUJA CZY PRZEKAZAC TRUE DO REDUXA AHA
+	// 		setCredits((prevCredit) => prevCredit - stake);
+	// 	}
+	// };
 
 	const generateRandomSymbols = () => {
 		return Array.from({ length: 3 }, () => symbols[Math.floor(Math.random() * symbols.length)]);
@@ -112,27 +100,42 @@ const SlotMachine = () => {
 
 	const spinReels = () => {
 		const results = Array.from({ length: 3 }, () => generateRandomSymbols());
-		setSpinResults(results);
+		dispatch(setSpinResultAction(results));
 
-		setTimeout(() => {
-			dispatch(setStartSpinAction(false));
-			setIsSpinning(false);
-			//zabieram clase - krecimy reelsami a za (sume transition musi podliczyc wygrane - zeby bylo rowno wyswietlone czy wygrane czy nie) dojedzie do stanu renderowania wynikow krecenia - wiec potrzebujemy drugi setTimeout ktory jest pozniej
+		setTimeout(
+			() => {
+				dispatch(setMachineAvtiveAction(false));
+			},
+			400
+			// less time == better rolling animation :D
+		);
+	};
 
-			setTimeout(() => {
-				// tu mozna zrobic funkcje afterEndedSpin - i wrzucic to co ponizej - byloby czytelniej :)
-				// wiem ze callback HELL
-				console.log(checkNormalWin(results));
-				isWin(checkNormalWin(results));
-				isMegaWin(checkMegaWin(results));
-				setButtonDisable(false);
-			}, 1200);
-		}, 400);
+	const mockModel = () => {
+		return (
+			<>
+				{megaWinCombinations[1].map((result, index) => (
+					<div
+						key={index}
+						className='reels'
+					>
+						{result.map((symbol, symbolIndex) => (
+							<div
+								key={symbolIndex}
+								className='reel'
+							>
+								{symbol}
+							</div>
+						))}
+					</div>
+				))}
+			</>
+		);
 	};
 
 	return (
 		<>
-			<div className={`slot__machine ${isSpinning ? 'slot__machine--active' : ''}`}>
+			<div className={`slot__machine ${machineActive ? 'slot__machine--active' : ''}`}>
 				{renderResult()}
 				{renderReels(12)}
 			</div>

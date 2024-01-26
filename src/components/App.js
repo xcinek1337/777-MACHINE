@@ -7,7 +7,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import Confetti from 'react-dom-confetti';
 import SlotMachine from './SlotMachine';
 import Gui from './Gui';
-import Screen from './Screen';
+import ScreenFrame from './ScreenFrame';
 // import './2style.css';
 import '../styles/_styles.scss'
 
@@ -34,7 +34,7 @@ const App = () => {
 			</header>
 			<main style={{ position: 'relative' }}>
 				<SlotMachine />
-				<Screen />
+				<ScreenFrame />
 				<Gui />
 			</main>
 			<footer className='slot__footer'>2077© Provider by xcinek1337</footer>
