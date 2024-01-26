@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setStartSpinAction } from '../redux/actions/777machine';
 
 const Gui = () => {
+	const [f, sf] = useState(false);
+	const [g, sg]=useState(false);
+
 	const dispatch = useDispatch();
 	return (
 		<div className='slot__gui gui'>
-			{/* <p>CREDITS:</p> */}
-			{/* {win && <h2>normal win</h2>} */}
-			{/* {megaWin && <h2>JACKOPOT!@#!@#Q!@#</h2>} */}
-			{/* {insufficientCredits && <h1 style={{ color: 'red' }}>no avaliable fund </h1>} */}
-			<button
-				onClick={() => dispatch(setStartSpinAction(true))}
-				disabled={false}
-			>
-				Spin
-			</button>
-		
+			<div className='gui__msg'>
+				{f && <span className='gui__msg--normal'>normal win</span>}
+				{f && <h2 className='gui__msg--jackpot'>JACKOPOT!@#!@#Q!@#</h2>}
+				{g && <h1
+					className='gui__msg--funds'
+					style={{ color: 'red' }}
+				>
+					no avaliable funds
+				</h1>}
+			</div>
+			<div className='gui__buttons'>
+				<div className='gui__stake'>
+					<button className='gui__stake--up'>+</button>
+					<span>STAKE: 10</span>
+					<button className='gui__stake--down'>-</button>
+				</div>
+				<button className='gui__spin_btn' onClick={() => dispatch(setStartSpinAction(true))}>Spin</button>
+				<span>CREDITS 1000</span>
+			</div>
 			{/* <button onClick={() => setStake((prevStake) => prevStake + 50)}>+</button> */}
 			{/* <div>
 				<p>stake:</p>

@@ -117,7 +117,7 @@ const SlotMachine = () => {
 		setTimeout(() => {
 			dispatch(setStartSpinAction(false));
 			setIsSpinning(false);
-			//zabieram clase - krecimy reelsami a za sekunde dojedzie do stanu renderowania wynikow krecenia - wiec potrzebujemy drugi setTimeout ktory jest pozniej
+			//zabieram clase - krecimy reelsami a za (sume transition musi podliczyc wygrane - zeby bylo rowno wyswietlone czy wygrane czy nie) dojedzie do stanu renderowania wynikow krecenia - wiec potrzebujemy drugi setTimeout ktory jest pozniej
 
 			setTimeout(() => {
 				// tu mozna zrobic funkcje afterEndedSpin - i wrzucic to co ponizej - byloby czytelniej :)
@@ -126,8 +126,8 @@ const SlotMachine = () => {
 				isWin(checkNormalWin(results));
 				isMegaWin(checkMegaWin(results));
 				setButtonDisable(false);
-			}, 1000);
-		}, 1000);
+			}, 1200);
+		}, 400);
 	};
 
 	return (

@@ -5,7 +5,7 @@ const Screen = () => {
 		<div className='slot__screen screen'>
 			<img
 				className='screen__border'
-				src={require('../img/screen.png')}
+				src={require('../img/screenCutted.png')}
 				alt=''
 			/>
 		</div>

@@ -27,8 +27,9 @@ const App = () => {
 				active={false}
 				config={config}
 			/>
-			<header className='logo'>
-				
+			<header className='header'>
+				<button className='header__rules-btn'>ⓘ</button>
+				<button className='header__funds-btn' >add funds</button>
 			</header>
 			<main style={{ position: 'relative' }}>
 				<SlotMachine />
