@@ -22,7 +22,7 @@ body {
 		border: none;
 		z-index: 22;
 	}
-    
+
 	&__funds-btn {
 		height: 30%;
 		background-color: green;
@@ -65,13 +65,12 @@ body {
 }
 
 .gui {
+	
 	padding-top: 10vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-
-	height: 257px;
 
 	/* outline: 2px solid gold; */
 
@@ -104,7 +103,7 @@ body {
 .screen {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: start;
 	align-items: center;
 	&__border {
 		z-index: 1;
@@ -129,7 +128,7 @@ footer {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 15px;
+	height: 3vh;
 	text-align: center;
 	font-size: 0.7rem;
 	background-color: lightblue;

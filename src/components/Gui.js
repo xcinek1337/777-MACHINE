@@ -6,7 +6,7 @@ const Gui = () => {
 	const dispatch = useDispatch();
 	return (
 		<div className='slot__gui gui'>
-			{false && (
+			{true && (
 				<h1
 					className='gui__msg'
 					style={{ color: 'red' }}

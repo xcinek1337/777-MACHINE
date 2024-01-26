@@ -4,7 +4,7 @@ const Screen = () => {
 	return (
 		<div className='slot__screen screen'>
 			{false && <p className='screen__win'>one line win</p>}
-			{false && <h2 className='screen__jackpot'>JACKPOT!!!</h2>}
+			{true && <h2 className='screen__jackpot'>JACKPOT!!!</h2>}
 			<img
 				className='screen__border'
 				src={require('../img/screenCutted.png')}
