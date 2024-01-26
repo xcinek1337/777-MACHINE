@@ -8,6 +8,11 @@ body {
 	overflow: hidden;
 	font-size: 62.5%;
 }
+main {
+	display: flex;
+	flex-direction: column;
+	height: 74vh;
+}
 .header {
 	display: flex;
 	justify-content: space-between;
@@ -23,6 +28,7 @@ body {
 		z-index: 22;
 	}
 
+	// prosi sie o lepsze style @@@ <
 	&__funds-btn {
 		height: 30%;
 		background-color: green;
@@ -30,12 +36,6 @@ body {
 	}
 }
 .slot {
-	&__screen {
-		display: flex;
-		justify-content: center;
-		height: 230px;
-	}
-
 	&__machine {
 		position: absolute;
 		display: flex;
@@ -64,29 +64,49 @@ body {
 	font-size: 2.2rem;
 }
 
+.screen {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	height: 230px;
+	// border -- golden frame IMG
+	&__border {
+		position: absolute;
+		width: 265px;
+		height: 400px;
+		left: 50%;
+
+		transform: translate(-50%, -27%);
+		z-index: 1;
+	}
+	&__msg {
+		margin-top: 10vh;
+		background-color: #4bc584ab;
+		font-size: 2rem;
+		color: red;
+	}
+	&__win,
+	&__jackpot {
+		position: absolute;
+		top: 45%;
+		text-align: center;
+		font-weight: bold;
+		font-size: 1.5rem;
+		background-color: aliceblue;
+		z-index: 51;
+		color: red;
+	}
+}
 .gui {
-	
-	padding-top: 10vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-
-	/* outline: 2px solid gold; */
-
+	flex: 1;
+	padding-top: 10vh;
 	background-color: lightblue;
-
-	&__msg {
-		font-size: 1.4rem;
-		text-align: center;
-	}
-	&__buttons {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	}
-	&__buttons > * {
+	& > * {
 		font-size: 1.2rem;
 		margin: 0.5rem;
 	}
@@ -98,30 +118,6 @@ body {
 	&__stake {
 		display: flex;
 		flex-direction: column;
-	}
-}
-.screen {
-	display: flex;
-	flex-direction: column;
-	justify-content: start;
-	align-items: center;
-	&__border {
-		z-index: 1;
-		position: absolute;
-		width: 265px;
-		height: 400px;
-
-		top: -23%;
-		overflow: hidden;
-	}
-	&__win {
-		background-color: rgba(245, 245, 220, 0.626);
-		font-weight: bold;
-		font-size: 1.5rem;
-	}
-	&__jackpot {
-		background-color: beige;
-		font-size: 1.6rem;
 	}
 }
 footer {

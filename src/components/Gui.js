@@ -6,29 +6,19 @@ const Gui = () => {
 	const dispatch = useDispatch();
 	return (
 		<div className='slot__gui gui'>
-			{true && (
-				<h1
-					className='gui__msg'
-					style={{ color: 'red' }}
-				>
-					no avaliable funds
-				</h1>
-			)}
-
-			<div className='gui__buttons'>
-				<div className='gui__stake'>
-					<button className='gui__stake--up'>+</button>
-					<span>STAKE: 10</span>
-					<button className='gui__stake--down'>-</button>
-				</div>
-				<button
-					className='gui__spin-btn'
-					onClick={() => dispatch(setStartSpinAction(true))}
-				>
-					Spin
-				</button>
-				<span>CREDITS 1000</span>
+			<div className='gui__stake'>
+				<button className='gui__stake--up'>+</button>
+				<span>STAKE: 10</span>
+				<button className='gui__stake--down'>-</button>
 			</div>
+			<button
+				className='gui__spin-btn'
+				onClick={() => dispatch(setStartSpinAction(true))}
+			>
+				Spin
+			</button>
+			<span>CREDITS 1000</span>
+
 			{/* <button onClick={() => setStake((prevStake) => prevStake + 50)}>+</button> */}
 			{/* <div>
 				<p>stake:</p>

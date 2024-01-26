@@ -1,83 +1,27 @@
 // based on iphone SE / 6
 @media only screen and (min-width: 334px) {
 	.header {
-		// display: flex;
-		// justify-content: space-between;
-		// align-items: flex-start;
-		padding: 2.5rem 1.5rem;
-		// background-color: lightblue;
-		border: 2px solid blue;
-		// height: 23vh;
-
-		&__rules-btn {
-			font-size: 1.6rem;
-			// background-color: transparent;
-			// border: none;
-			// z-index: 22;
-		}
-
-		&__funds-btn {
-			// height: 30%;
-			// background-color: green;
-			// z-index: 22;
-		}
+		padding: 2rem 1.5rem;
 	}
-	.slot {
-		&__screen {
-			// display: flex;
-			// justify-content: center;
-			height: 235px;
-            border: 2px solid red;
-		}
-
-		&__machine {
-			// position: absolute;
-			// display: flex;
-			// flex-direction: column;
-			// align-items: center;
-			// justify-content: start
-
-			top: 0%;
-			left: 50%;
-			transform: translate(-50%, 0);
-			height: 330px;
-
-			transition: transform 0.8s;
-			z-index: -2;
-
-			&--active {
-				transform: translate(-50%, -266%);
-			}
-		}
+	.reels {
+		display: flex;
 	}
-	// .reels {
-	// 	display: flex;
-	// }
 	.reel {
-		margin: 0 1.2rem 1.2rem;
-		font-size: 3rem;
-	}
-
-	.gui {
-	height: 100vh;
-
+		margin: 0 1rem 1rem;
+		font-size: 2.7rem;
 	}
 	.screen {
-	
+		// border -- golden frame IMG
 		&__border {
-			
-			width: 360px;
-			height: 450px;
-
-			top: -27%;
-			
-		}
-		
-		&__jackpot {
-            padding: 0.2rem;
-		
-			font-size: 2rem;
+			width: 320px;
+			height: 440px;
+			transform: translate(-50%, -31%);
 		}
 	}
-	
+	.gui {
+		&__spin-btn {
+            margin: 1rem;
+			padding: 0.6rem 1.2rem;
+		}
+	}
 }

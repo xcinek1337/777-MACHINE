@@ -1,0 +1,50 @@
+@media only screen and (min-width: 576px) {
+	.header {
+		padding: 2rem 3rem;
+		&__rules-btn {
+			font-size: 1.6rem;
+		}
+	}
+	.slot {
+		&__machine {
+			&--active {
+				transform: translate(-50%, -345%);
+			}
+		}
+	}
+	.reel {
+		margin: 0 1.2rem 1.2rem;
+		font-size: 3.6rem;
+	}
+
+	.screen {
+		height: 280px;
+		// border -- golden frame IMG
+		&__border {
+			width: 460px;
+			height: 500px;
+			transform: translate(-50%, -29%);
+		}
+		&__msg {
+			font-size: 2.5rem;
+		}
+		&__win,
+		&__jackpot {
+			font-size: 2.5rem;
+		}
+	}
+	.gui {
+        flex-direction: row;
+        & > * {
+			font-size: 1.4rem;
+            // left padding higer than right, that spin button should will be more 'center'
+			margin: 0 1.6rem 0 3rem;
+		}
+		&__spin-btn {
+			padding: 1rem 2rem
+		}
+	}
+	footer {
+		font-size: 0.9rem;
+	}
+}
