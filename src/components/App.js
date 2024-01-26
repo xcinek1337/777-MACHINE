@@ -8,7 +8,8 @@ import Confetti from 'react-dom-confetti';
 import SlotMachine from './SlotMachine';
 import Gui from './Gui';
 import Screen from './Screen';
-import './2style.css';
+// import './2style.css';
+import '../styles/_styles.scss'
 
 import reducers from '../redux/reducers';
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
