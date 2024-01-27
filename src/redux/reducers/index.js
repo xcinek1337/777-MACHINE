@@ -17,7 +17,7 @@ const reducers = (state = initialState, action) => {
 		case typesAction.START_SPIN:
 			return {
 				...state,
-			startSpin: action.payload.value,
+				startSpin: action.payload.value,
 			};
 		case typesAction.SET_MACHINE_ACTIVE:
 			return {
@@ -32,7 +32,7 @@ const reducers = (state = initialState, action) => {
 		case typesAction.SET_SPIN_RESULT:
 			return {
 				...state,
-				spinResult: action.payload.result,
+				spinResult: action.payload.value,
 			};
 		case typesAction.SET_NORMAL_WIN:
 			return {
@@ -43,6 +43,16 @@ const reducers = (state = initialState, action) => {
 			return {
 				...state,
 				megaWin: action.payload.value,
+			};
+		case typesAction.SET_NOT_FUNDS:
+			return {
+				...state,
+				noFunds: action.payload.value,
+			};
+		case typesAction.SET_CREDITS:
+			return {
+				...state,
+				credits: action.payload.value,
 			};
 		default:
 			return state;

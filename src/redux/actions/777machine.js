@@ -5,6 +5,8 @@ export const typesAction = {
 	SET_SPIN_RESULT: 'setSpinResult',
 	SET_NORMAL_WIN: 'setNormalWin',
 	SET_MEGA_WIN: 'setMegaWin',
+	SET_NOT_FUNDS: 'setNoFunds',
+	SET_CREDITS: 'setCredits',
 };
 
 export const setStartSpinAction = (value) => {
@@ -31,11 +33,11 @@ export const setButtonDisableAction = (value) => {
 		},
 	};
 };
-export const setSpinResultAction = (result) => {
+export const setSpinResultAction = (value) => {
 	return {
 		type: typesAction.SET_SPIN_RESULT,
 		payload: {
-			result,
+			value,
 		},
 	};
 };
@@ -50,6 +52,22 @@ export const setNormalWinAction = (value) => {
 export const setMegaWinAction = (value) => {
 	return {
 		type: typesAction.SET_MEGA_WIN,
+		payload: {
+			value,
+		},
+	};
+};
+export const setNoFundsAction = (value) => {
+	return {
+		type: typesAction.SET_NOT_FUNDS,
+		payload: {
+			value,
+		},
+	};
+};
+export const setCreditsAction = (value) => {
+	return {
+		type: typesAction.SET_CREDITS,
 		payload: {
 			value,
 		},
