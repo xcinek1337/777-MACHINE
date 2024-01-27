@@ -7,6 +7,7 @@ export const typesAction = {
 	SET_MEGA_WIN: 'setMegaWin',
 	SET_NOT_FUNDS: 'setNoFunds',
 	SET_CREDITS: 'setCredits',
+	SET_STAKE: 'setStake',
 };
 
 export const setStartSpinAction = (value) => {
@@ -68,6 +69,14 @@ export const setNoFundsAction = (value) => {
 export const setCreditsAction = (value) => {
 	return {
 		type: typesAction.SET_CREDITS,
+		payload: {
+			value,
+		},
+	};
+};
+export const setStakeAction = (value) => {
+	return {
+		type: typesAction.SET_STAKE,
 		payload: {
 			value,
 		},

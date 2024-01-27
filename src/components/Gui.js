@@ -7,6 +7,7 @@ import {
 	setNormalWinAction,
 	setNoFundsAction,
 	setCreditsAction,
+	setStakeAction,
 } from '../redux/actions/777machine';
 
 const Gui = () => {
@@ -34,12 +35,28 @@ const Gui = () => {
 		}
 	};
 
+	const handleStakeChange = (amount) => {
+		const updatedStake = stake + amount;
+		if (updatedStake >= 1) {
+			dispatch(setStakeAction(updatedStake));
+		}
+	};
 	return (
 		<div className='slot__gui gui'>
 			<div className='gui__stake'>
-				<button className='gui__stake--up'>+</button>
+				<button
+					onClick={() => handleStakeChange(50)}
+					className='gui__stake--up'
+				>
+					+
+				</button>
 				<span>STAKE: {stake}</span>
-				<button className='gui__stake--down'>-</button>
+				<button
+					onClick={() => handleStakeChange(-50)}	
+					className='gui__stake--down'
+				>
+					-
+				</button>
 			</div>
 			<button
 				className='gui__spin-btn'

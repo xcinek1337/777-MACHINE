@@ -54,6 +54,11 @@ const reducers = (state = initialState, action) => {
 				...state,
 				credits: action.payload.value,
 			};
+		case typesAction.SET_STAKE:
+			return {
+				...state,
+				stake: action.payload.value,
+			};
 		default:
 			return state;
 	}

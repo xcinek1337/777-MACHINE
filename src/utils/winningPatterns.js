@@ -1,5 +1,5 @@
-// export const symbols = ['🍒', '🍇', '🍊', '🔔', '💎'];
-export const symbols = ['🍒', '🍇'];
+export const symbols = ['🍒', '🍇', '🍊', '🔔', '💎'];
+// export const symbols = ['🍒', '🍇'];
 
 export const winCombinations = [
 	['🍒', '🍒', '🍒'],
